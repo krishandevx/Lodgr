@@ -13,3 +13,6 @@
 ### includes and layouts server the static and common code like header, footer etc.
 
 ### if we want to show anything over the image then we use card-img-overlay and in future i wanted to use it for the like button
+
+### Validation -> from client to server -> checks the data which we are sending from client to server is correct or not. 1.When we enter data in the form, the browser and/or the web server will check to see that the data is in the correct format and within the constraints set by the application. 
+### Server -> error handling

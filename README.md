@@ -14,5 +14,10 @@
 
 ### if we want to show anything over the image then we use card-img-overlay and in future i wanted to use it for the like button
 
-### Validation -> from client to server -> checks the data which we are sending from client to server is correct or not. 1.When we enter data in the form, the browser and/or the web server will check to see that the data is in the correct format and within the constraints set by the application. 
+### Validation -> from client to server -> checks the data which we are sending from client to server is correct or not. 1.When we enter data in the form, the browser and/or the web server will check to see that the data is in the correct format and within the constraints set by the application. we make script.js inside js inside public folder to implement the bootstrap default error(blank) message instead of browser default message
 ### Server -> error handling
+
+### custom error handler -> for preventing the server from accepting wrong information from the services like postman and hoppscoth.
+
+
+

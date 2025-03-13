@@ -94,6 +94,7 @@ body {
 .add-btn,.edit-btn {
     background-color: #DF1561 !important;
     border: none !important;
+    margin-bottom: 3rem;
 }
 
 /* Show Page */

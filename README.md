@@ -23,4 +23,9 @@
 
 ### Now we validate the schema that it doesn't handle wrong requests and only create listing with correct data and for that we have 2 ways first if(!newListing.description){throw new ExpressError(400"Description is missing)'?:} write this in create route and 2nd is to use the tool joi which is used to validate the schema and with the help of it we define a schema and this schema is not for mongoose but it is for server-side validation
 
-### Handling Deletions: there is relation between our users and the posts which is one to many. So, if user delete its account then all of its posts must have to be deleted and the 2nd case is that if user is delete then its posts may be shown up and the msg appears that the user doesn't exist
+### Handling Deletions: there is relation between our users and the posts which is one to many. So, if user delete its account then all of its posts must have to be deleted and the 2nd case is that if user is delete then its posts may be shown up and the msg appears that the user doesn't exist 
+
+### We handle deletions using mongoose midlewares - we use 2 middlewares pre & post of Query middlewares. and in mongoose findByIdAndDelete automatically triggers the findOneAndDelete
+
+### we have moved all the listings in the routes folder and inside lisiting.js using express router
+ 

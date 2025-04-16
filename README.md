@@ -29,3 +29,38 @@
 
 ### we have moved all the listings in the routes folder and inside lisiting.js using express router
  
+### About merge params
+🚀 What mergeParams: true does:
+When you create a router using express.Router(), by default it does not inherit route parameters (like :id) from its parent route.
+
+So if you have:
+
+js
+Copy
+Edit
+app.use("/listings/:id/reviews", reviewsRouter);
+The :id in that URL path belongs to the parent (app.js), and unless you tell Express to "merge" the parent parameters into the child router, the reviewsRouter won’t have access to req.params.id.
+
+🔧 When you use:
+js
+Copy
+Edit
+const router = express.Router({ mergeParams: true });
+It tells Express:
+
+“Hey, please include any route parameters (like :id) from the parent path in req.params inside this router too.”
+
+📦 Without mergeParams: true:
+req.params in review.js → {} ❌
+
+So req.params.id is undefined
+
+✅ With mergeParams: true:
+req.params in review.js → { id: '12345' } ✅
+
+Now Listing.findById(req.params.id) works perfectly
+
+TL;DR:
+mergeParams: true lets your nested router access parameters from its parent route path. It’s essential for routes like /listings/:id/reviews.
+
+Let me know if you want a visual of how the routing structure looks too!

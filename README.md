@@ -64,3 +64,16 @@ TL;DR:
 mergeParams: true lets your nested router access parameters from its parent route path. It’s essential for routes like /listings/:id/reviews.
 
 Let me know if you want a visual of how the routing structure looks too!
+
+### Stateful and Stateless
+
+Stateful store session information and state and stateless doesn't store it.
+We are using stateless currently. but, we try to make our session stateful by using express session.
+We are currently using sessionStore as memoryStore but it is not meant for production purpose. for that we will choose another store
+
+### connect flash
+We use it to flash messages as indicators in our app single time and it is a type of middleware and it is mainly works with the combination of redirects
+
+We use res.local. bcz this property to set variables accessible in templates rendered with res.render. The variables set on res. locals are available within a single request-response cycle, and will not be shared between requests. mtlb hm kisi bhi msg ko res.locals m save kr skte h agr hme wo ejs m use krna h.
+
+We must have to use flash before our routes

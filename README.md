@@ -77,3 +77,21 @@ We use it to flash messages as indicators in our app single time and it is a typ
 We use res.local. bcz this property to set variables accessible in templates rendered with res.render. The variables set on res. locals are available within a single request-response cycle, and will not be shared between requests. mtlb hm kisi bhi msg ko res.locals m save kr skte h agr hme wo ejs m use krna h.
 
 We must have to use flash before our routes
+
+### Authentication
+
+We use passport for that and we use passport local startegy and also use passport local mongoose which automatically adds a username and do hashing and salting on its own.
+
+and passport also uses session for storing information.
+
+we use passport.session for: A web application needs the ability to identify users as they browse from page to page. This series of requests and responses, each associated with the same user, is known as a session.
+
+We use PBKDF2 encrypting algorithm.
+
+The work of user existing in database is done by passport as a middleware.
+
+Jb hm user ko serialize krte h to actual m uski info. ko store krte h
+
+We know that the req.user store all the info. of user. so, if this object is undefined that means that the user is not logged in so in that case we will show him the signup and login option and if there is something in the object then we will show him the logout
+
+we use req.login method of passport to bypass login after signup

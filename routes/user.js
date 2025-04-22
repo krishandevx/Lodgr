@@ -48,7 +48,7 @@ router.post(
   async (req, res) => {
     req.flash(
       "success",
-      "Logged in successfully.<br>Ready to discover your next destination?"
+      "Logged in successfully. Ready to discover your next destination?"
     );
     let redirectUrl = res.locals.redirectUrl || "listings"
     res.redirect(redirectUrl);

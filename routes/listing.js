@@ -35,11 +35,12 @@ router.get(
     "/:id",
     wrapAsync(async (req, res) => {
       let { id } = req.params;
-      const listing = await Listing.findById(id).populate("reviews");
+      const listing = await Listing.findById(id).populate("reviews").populate("owner")
       if(!listing){
         req.flash("error","The listing you are looking for is no longer available.")
         res.redirect("/listings")
       }
+      console.log(listing)
       res.render("listings/show.ejs", { listing });
     })
   );
@@ -51,6 +52,7 @@ router.get(
     validateListing,
     wrapAsync(async (req, res, next) => {
       const newListing = new Listing(req.body.listing); // Chances of error
+      newListing.owner = req.user._id     // current user id
       await newListing.save();
       req.flash("success","New Listing Created!")
       res.redirect("/listings");

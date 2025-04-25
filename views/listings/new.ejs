@@ -1,150 +1,124 @@
 <% layout("/layouts/boilerplate")%>
 <div class="row mt-3">
   <div class="col-8 offset-2">
-    
-      <br />
-      <h3>Create a New Listing</h3>
+    <br />
+    <h3>Create a New Listing</h3>
 
-      <form method="POST" action="/listings" novalidate class="needs-validation">
-        <div class="mb-3">
-          <label for="title" class="form-label">Title</label>
+    <form
+      method="POST"
+      action="/listings"
+      novalidate
+      class="needs-validation"
+      enctype="multipart/form-data"
+    >
+      <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input
+          name="listing[title]"
+          placeholder="Enter Title"
+          type="text"
+          class="form-control"
+          required
+        />
+
+        <div class="valid-feedback">Title looks good!</div>
+
+        <div class="invalid-feedback">Enter a valid title.</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea
+          name="listing[description]"
+          placeholder="Nice and sweet place to reside"
+          type="text"
+          class="form-control"
+          required
+        ></textarea>
+
+        <div class="valid-feedback">Description looks great!</div>
+
+        <div class="invalid-feedback">Description cannot be empty.</div>
+      </div>
+
+
+      <div class="mb-3">
+        <label for="image" class="form-label">Upload Image</label>
+        <input
+          name="listing[image][url]"
+          type="file"
+          class="form-control"
+          required
+        />
+
+        <div class="valid-feedback">Image uploaded successfully!</div>
+
+        <div class="invalid-feedback">Please upload a valid image file.</div>
+      </div>
+
+      <div class="row">
+        <div class="mb-3 col-md-4">
+          <label for="price" class="form-label">Price</label>
           <input
-            name="listing[title]"
-            placeholder="Enter Title"
+            name="listing[price]"
+            placeholder="5,000"
+            type="number"
+            class="form-control"
+            required
+          />
+
+          <div class="valid-feedback">Price is valid!</div>
+
+          <div class="invalid-feedback">Enter a valid price.</div>
+        </div>
+        <div class="mb-3 col-md-8">
+          <label for="country" class="form-label">Country</label>
+          <input
+            name="listing[country]"
+            placeholder="India"
             type="text"
             class="form-control"
             required
           />
 
-          <div class="valid-feedback">
-            Title looks good!
-          </div>
+          <div class="valid-feedback">Country looks verified!</div>
 
-          <div class="invalid-feedback">
-            Enter a valid title.
-          </div>
-
+          <div class="invalid-feedback">Select a valid country.</div>
         </div>
-        
-        
+      </div>
 
-        <div class="mb-3">
-          <label for="description" class="form-label">Description</label>
-          <textarea
-            name="listing[description]"
-            placeholder="Nice and sweet place to reside"
-            type="text"
-            class="form-control"
-            required
-          ></textarea>
+      <div class="mb-3">
+        <label for="location" class="form-label">Location</label>
+        <input
+          name="listing[location]"
+          placeholder="Rajouri Garden,Delhi"
+          type="text"
+          class="form-control"
+          required
+        />
 
-          <div class="valid-feedback">
-            Description looks great!
-          </div>
+        <div class="valid-feedback">Location verified!</div>
 
-          <div class="invalid-feedback">
-            Description cannot be empty.
-          </div>
+        <div class="invalid-feedback">Enter a valid location.</div>
+      </div>
 
-        </div>
-
-        <div class="mb-3">
-          <label for="image" class="form-label">Image Url</label>
+      <div class="col-12">
+        <div class="form-check">
           <input
-            name="listing[image][url]"
-            placeholder="Enter Image Url"
-            type="text"
-            class="form-control"
+            class="form-check-input"
+            type="checkbox"
+            value=""
+            id="invalidCheck"
             required
           />
-
-          <div class="valid-feedback">
-            Image uploaded successfully!
-          </div>
-
-          <div class="invalid-feedback">
-            Please upload a valid image file.
-          </div>
-
+          <label class="form-check-label" for="invalidCheck">
+            Agree to terms and conditions
+          </label>
+          <div class="invalid-feedback">You must agree before submitting.</div>
         </div>
+      </div>
 
-        <div class="row">
-          <div class="mb-3 col-md-4">
-            <label for="price" class="form-label">Price</label>
-            <input
-              name="listing[price]"
-              placeholder="5,000"
-              type="number"
-              class="form-control"
-              required
-            />
-
-            <div class="valid-feedback">
-              Price is valid!
-            </div>
-  
-            <div class="invalid-feedback">
-              Enter a valid price.
-            </div>
-
-          </div>
-          <div class="mb-3 col-md-8">
-            <label for="country" class="form-label">Country</label>
-            <input
-              name="listing[country]"
-              placeholder="India"
-              type="text"
-              class="form-control"
-              required
-            />
-
-            <div class="valid-feedback">
-              Country looks verified!
-            </div>
-  
-            <div class="invalid-feedback">
-              Select a valid country.
-            </div>
-
-          </div>
-        </div>
-
-        <div class="mb-3">
-          <label for="location" class="form-label">Location</label>
-          <input
-            name="listing[location]"
-            placeholder="Rajouri Garden,Delhi"
-            type="text"
-            class="form-control"
-            required
-          />
-
-          <div class="valid-feedback">
-            Location verified!
-          </div>
-
-          <div class="invalid-feedback">
-            Enter a valid location.
-          </div>
-
-        </div>
-
-        <div class="col-12">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
-            <label class="form-check-label" for="invalidCheck">
-              Agree to terms and conditions
-            </label>
-            <div class="invalid-feedback">
-              You must agree before submitting.
-            </div>
-          </div>
-        </div>
-        
-        <button class="btn btn-dark add-btn mt-3">Add</button>
-      </form>
-      
+      <button class="btn btn-dark add-btn mt-3">Add</button>
+    </form>
   </div>
 </div>
-
-

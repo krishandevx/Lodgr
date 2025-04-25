@@ -2,7 +2,7 @@
 
 ### index.ejs sab kuch dikhayega or uske andr li ka jo anchor tag h wo redirect krega show route p and this is the get request and show route is to show the details of the specific listing
 
-## We have toLocaleString() which convert which convert numbers to string with commas
+### We have toLocaleString() which convert which convert numbers to string with commas
 
 ### Create and New route Get request to -> /listings/new -> Form -> Submit krne k baad request 2nd route pr jayegi (create route pr jo ki POST route hoga) -> /listings
 
@@ -95,3 +95,26 @@ Jb hm user ko serialize krte h to actual m uski info. ko store krte h
 We know that the req.user store all the info. of user. so, if this object is undefined that means that the user is not logged in so in that case we will show him the signup and login option and if there is something in the object then we will show him the logout
 
 we use req.login method of passport to bypass login after signup
+
+### We are using router.route to do write all the functionalities for the same path at a single place
+
+### Image Upload
+- Our form is not able to send files to the backend. It can only send raw data to the backend which we are collecting.
+- We can't save our images in mongodb as we know that it store files in BSON format and it has very limited size.
+- We are unable to send files to backend.bcz, our encoding type is urlendcoded which is unable to send files. so, we have change the encoding type to enctype="multipart/form-data"
+- for handling the multipart. we use multer which is a middleware primarily used for uploading files and it will not process any form which is not mutipart
+
+### We use dotenv to integrate our .env file with out backend 
+### If we use multer with cloudinary then we use 2 libraries which are cloudinary and multer-storage-cloudinary
+- In the cloudinary our image goes to backend and backend stores it in cloudinary which is a 3rd party service and then it returns a link which we stores in our mongodb server.
+
+### we are getting error while  using validatelisting.bcz, of the:
+ Here’s what’s happening:
+
+validateListing runs before the multer middleware.
+
+That means req.body is parsed, but not the file.
+
+Your Joi schema expects listing.image.url and listing.image.filename — but since the image isn't processed yet, it’s missing.
+
+So the validation fails.

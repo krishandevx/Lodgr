@@ -1,7 +1,7 @@
 const Listing = require("./models/listing")
 const Review = require("./models/review")
 const ExpressError = require("./utils/ExpressError.js");
-const { listingSchema, reviewSchema} = require("./schema.js");
+const { createListingSchema,updateListingSchema ,reviewSchema} = require("./schema.js");
 module.exports.isLoggedin = (req, res, next) => {
     if(!req.isAuthenticated()){
         req.session.redirectUrl = req.originalUrl
@@ -29,7 +29,8 @@ module.exports.isOwner = async (req, res, next) => {
 }
 
 module.exports.validateListing = (req, res, next) => {
-  let result = listingSchema.validate(req.body, { abortEarly: false });
+  const schema = req.method === "POST" ? createListingSchema : updateListingSchema;
+  let result = schema.validate(req.body, { abortEarly: false });
 
   if (result.error) {
     let errMsg = result.error.details.map((el) => el.message).join(", ");
@@ -58,4 +59,19 @@ module.exports.validateReview = (req, res, next) => {
        return res.redirect(`/listings/${id}`)
       }
       next()
+}
+
+module.exports.setListingImageData = (req, res, next) => {
+  if (req.file) {
+    req.body.listing.image = {
+      url: req.file.path,
+      filename: req.file.filename
+    };
+  } else {
+    // If image was not uploaded, remove it from body to avoid Joi validation errors
+    if (req.body.listing && req.body.listing.image) {
+      delete req.body.listing.image;
+    }
+  }
+  next();
 }

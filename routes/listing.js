@@ -1,101 +1,46 @@
 const express = require("express");
 const router = express.Router();
 const wrapAsync = require("../utils/wrapAsync.js");
-const Listing = require("../models/listing.js");
-const { isLoggedin, isOwner, validateListing } = require("../middleware.js");
+const { isLoggedin, isOwner, validateListing, setListingImageData } = require("../middleware.js");
+const listingController = require("../controllers/listings.js");
+const multer = require("multer");
+const {storage} = require("../cloudConfig.js")
+const upload = multer({storage});
 
-router.get(
-  "/",
-  wrapAsync(async (req, res) => {
-    const allListings = await Listing.find({});
-    res.render("listings/index.ejs", { allListings });
-  })
-);
+router
+  .route("/")
+  .get(wrapAsync(listingController.index))
+  .post(
+    isLoggedin,
+    upload.single("listing[image][url]"),
+    setListingImageData,
+    validateListing,
+    wrapAsync(listingController.createListing)
+  )
+
 
 // New Route
-router.get("/new", isLoggedin, (req, res) => {
-  res.render("listings/new.ejs");
-});
+router.get("/new", isLoggedin, listingController.renderNewForm);
 
-// Show Route
-router.get(
-  "/:id",
-  wrapAsync(async (req, res) => {
-    let { id } = req.params;
-    const listing = await Listing.findById(id)
-      .populate({ path: "reviews", populate: { path: "author" } })
-      .populate("owner");
-    if (!listing) {
-      req.flash(
-        "error",
-        "The listing you are looking for is no longer available."
-      );
-      res.redirect("/listings");
-    }
-    console.log(listing);
-    res.render("listings/show.ejs", { listing });
-  })
-);
-
-// Create Route
-router.post(
-  "/",
-  isLoggedin,
-  validateListing,
-  wrapAsync(async (req, res, next) => {
-    const newListing = new Listing(req.body.listing); // Chances of error
-    newListing.owner = req.user._id; // current user id
-    await newListing.save();
-    req.flash("success", "New Listing Created!");
-    res.redirect("/listings");
-  })
-);
+router
+  .route("/:id")
+  .get(wrapAsync(listingController.showListing))
+  .put(
+    isLoggedin,
+    isOwner,
+    upload.single("listing[image][url]"),
+    setListingImageData,
+    validateListing,
+    wrapAsync(listingController.updateListing)
+  )
+  .delete(isLoggedin, isOwner, wrapAsync(listingController.deleteListing));
 
 //Edit Route
 router.get(
   "/:id/edit",
   isLoggedin,
   isOwner,
-  wrapAsync(async (req, res) => {
-    let { id } = req.params;
-    const listing = await Listing.findById(id);
-    if (!listing) {
-      req.flash(
-        "error",
-        "The listing you are looking for is no longer available."
-      );
-      res.redirect("/listings");
-    }
-    res.render("listings/edit.ejs", { listing });
-  })
-);
-
-// Update Route
-router.put(
-  "/:id",
-  isLoggedin,
-  isOwner,
-  validateListing,
-  wrapAsync(async (req, res) => {
-    let { id } = req.params;
-    await Listing.findByIdAndUpdate(id, { ...req.body.listing });
-    req.flash("success", "Listing Updated");
-    res.redirect(`/listings/${id}`);
-  })
-);
-
-// Delete Route
-router.delete(
-  "/:id",
-  isLoggedin,
-  isOwner,
-  wrapAsync(async (req, res) => {
-    let { id } = req.params;
-    let deletedListing = await Listing.findByIdAndDelete(id);
-    // console.log(deletedListing);
-    req.flash("success", "Listing Deleted Successfully!");
-    res.redirect("/listings");
-  })
+  wrapAsync(listingController.renderEditForm)
 );
 
 module.exports = router;

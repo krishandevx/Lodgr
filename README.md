@@ -118,3 +118,9 @@ That means req.body is parsed, but not the file.
 Your Joi schema expects listing.image.url and listing.image.filename — but since the image isn't processed yet, it’s missing.
 
 So the validation fails.
+
+### We are storing coordinates of map in geojson format in mongoose. and we are using geojson rather than using mongodb storage.because, it is easy to perform actions on this and it also gives many inbuilt functionalities
+
+### Deployment
+- We deploy our database on mongodb atlas.
+- We use mongo session store for production environment: connect-mongo

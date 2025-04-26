@@ -1,114 +1,122 @@
 body {
-    font-family: "Plus Jakarta Sans", sans-serif;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 .container {
-    flex: 1;
+  flex: 1;
 }
 
 .navbar {
-    height: 5rem;
-    background-color: #ffffff;
+  height: 5rem;
+  background-color: #ffffff;
 }
 
 .mainlogo {
-    color: #DF1561;
-    font-size: 2rem;
+  color: #df1561;
+  font-size: 2rem;
 }
 
 .nav-link {
-    color: #222222 !important;
+  color: #222222 !important;
 }
-
 
 /* Footer */
 .f-info-links a {
-    text-decoration: none;
-    color: #222222;
+  text-decoration: none;
+  color: #222222;
 }
 
 .f-info-links a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
-.f-info-links, .f-info-socials, .brand-name {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.f-info-links,
+.f-info-socials,
+.brand-name {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .f-info-socials i {
-    font-size: 1.7rem;
-    margin-right: 1.1rem;
+  font-size: 1.7rem;
+  margin-right: 1.1rem;
 }
 
 .f-info {
-    text-align: center;
-    height: 8rem;
-    background-color: #ebebeb;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: space-evenly;
+  text-align: center;
+  height: 8rem;
+  background-color: #ebebeb;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: space-evenly;
 }
 
 .listing-card {
-    border: none !important;
-    margin-bottom: 2rem;
-     
+  border: none !important;
+  margin-bottom: 2rem;
 }
 
 .card-img-top {
-    border-radius: 1rem !important;
-    width: 100% !important;
-    object-fit: cover !important;
+  border-radius: 1rem !important;
+  width: 100% !important;
+  object-fit: cover !important;
 }
 
 .card-body {
-    padding: 0 !important;
+  padding: 0 !important;
 }
 
 .card-text p {
-    font-weight: 400 !important;
+  font-weight: 400 !important;
 }
-  
+
 .listing-link {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 /* Card Effect */
 
 .card-img-overlay {
-    opacity: 0;
+  opacity: 0;
 }
 
 .card-img-overlay:hover {
-    opacity: 0.5;
-    background-color: rgba(255, 255, 255, 0.47);
+  opacity: 0.5;
+  background-color: rgba(255, 255, 255, 0.47);
 }
 
-.add-btn,.edit-btn {
-    background-color: #DF1561 !important;
-    border: none !important;
-    margin-bottom: 3rem;
+.add-btn,
+.edit-btn {
+  background-color: #df1561 !important;
+  border: none !important;
+  margin-bottom: 3rem;
 }
 
 /* Show Page */
 
 .show-img {
-    height: 30vh;
+  height: 30vh;
 }
 
 .btns {
-    display: flex;
-    margin-bottom: 3rem;
+  display: flex;
+  margin-bottom: 3rem;
 }
 
 .show-card {
-    padding-left: 0;
-    padding-right: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* Map Styling */
+#map {
+  height: 400px;
+  width: 90vh;
+  border-radius: 3px;
 }
